@@ -1,0 +1,56 @@
+pluginManagement {
+    repositories {
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenCentral()
+        gradlePluginPortal()
+        maven { url 'https://jitpack.io' }
+
+    }
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = new File(rootDir, "local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withInputStream { localProperties.load(it) }
+}
+def gprUser = localProperties.getProperty("gpr.user") ?: settings.providers.gradleProperty("gpr.user").orNull
+def gprToken = localProperties.getProperty("gpr.token") ?: settings.providers.gradleProperty("gpr.token").orNull
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+
+        // Mediation adapters required by AdsSdk (transitive via tutorial)
+        maven { url 'https://artifact.bytedance.com/repository/pangle/' }
+        maven { url 'https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea' }
+
+        maven {
+            name = "FirstOpenTutorial"
+            url = uri("https://maven.pkg.github.com/The-Arrows-JSC/FirstOpenTutorial")
+            credentials {
+                username = gprUser
+                password = gprToken
+            }
+        }
+        maven {
+            name = "AdsSdk"
+            url = uri("https://maven.pkg.github.com/The-Arrows-JSC/AdsSdk")
+            credentials {
+                username = gprUser
+                password = gprToken
+            }
+        }
+    }
+}
+
+rootProject.name = "DramaBite"
+include ':app'

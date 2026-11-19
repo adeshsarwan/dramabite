@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Override Ads SDK Ad label: even pill instead of the lopsided corner shape. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/ads_colorAds" />
+    <corners android:radius="4dp" />
+</shape>
