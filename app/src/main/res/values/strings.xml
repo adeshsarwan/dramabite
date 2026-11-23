@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name" translatable="false">DramaBite</string>
+    <string name="app_name" translatable="false">DramaNibble</string>
     <!-- Placeholder until Firebase Web client OAuth is added; then replace with console value or re-download google-services.json -->
     <string name="default_web_client_id" translatable="false">REPLACE_WITH_FIREBASE_WEB_CLIENT_ID.apps.googleusercontent.com</string>
     <string name="tyebsnbdanadjakjjdajjaoaduioskmdjk" translatable="false">VkX19zR+sx3QLUR7MqARhwvUXa68NPDAP7Ivc=</string>
-    <string name="facebook_app_id" translatable="false">2467242803739932</string>
+    <string name="facebook_app_id" translatable="false">TODO_FACEBOOK_APP_ID</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb2467242803739932</string>
-    <string name="facebook_client_token" translatable="false">ccc1699d80c225de0a94bde966bebb0d</string>
+    <string name="facebook_client_token" translatable="false">TODO_FACEBOOK_CLIENT_TOKEN</string>
     <string name="awsdahdbh" translatable="false">S7M6SE36</string>
     <string name="end_point" translatable="false">checkout</string>
 
@@ -99,7 +99,7 @@
     <string name="for_you_page">For You Page</string>
     <string name="swipe_up_to_change_episode_drama">Swipe up to change episode / drama</string>
     <string name="homepage_features">Homepage Features</string>
-    <string name="explore_everything_snap_drama_has_to_offer">Explore everything DramaBite has to offer.</string>
+    <string name="explore_everything_snap_drama_has_to_offer">Explore everything DramaNibble has to offer.</string>
     <string name="find_dramas_by_genre">Find dramas by genre</string>
     <string name="find_your_favorite_dramas">Find your favorite dramas</string>
     <string name="trending">Trending</string>

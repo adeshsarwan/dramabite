@@ -7,7 +7,7 @@
 
     <!-- party popper body -->
     <path
-        android:fillColor="#E9325A"
+        android:fillColor="#0E9F92"
         android:pathData="M28,62 L18,78 L34,72 Z" />
     <path
         android:fillColor="#C6284A"
@@ -21,7 +21,7 @@
         android:fillColor="#FFB74D"
         android:pathData="M62,36 m-3,0 a3,3 0 1,1 6,0 a3,3 0 1,1 -6,0" />
     <path
-        android:fillColor="#E9325A"
+        android:fillColor="#0E9F92"
         android:pathData="M48,20 L50,16 L52,20 L50,24 Z" />
     <path
         android:fillColor="#81C784"
