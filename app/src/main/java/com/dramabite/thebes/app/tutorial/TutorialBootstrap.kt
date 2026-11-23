@@ -68,7 +68,7 @@ object TutorialBootstrap {
             }
 
             theme {
-                val brand = hex("#E9325A")
+                val brand = hex("#F05A1A")
                 primary = brand
                 onPrimary = hex("#FFFFFF")
                 onboardingButtonBackground = brand
