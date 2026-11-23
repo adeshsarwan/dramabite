@@ -31,21 +31,30 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // Signing secrets live in keystore.properties + the .jks file, both git-ignored.
+    // Keep them on the build machine only (see keystore.properties.example).
+    def keystorePropsFile = rootProject.file("keystore.properties")
     def keystoreProps = new Properties()
-    rootProject.file("keystore.properties").withInputStream { keystoreProps.load(it) }
+    if (keystorePropsFile.exists()) {
+        keystorePropsFile.withInputStream { keystoreProps.load(it) }
+    }
     signingConfigs {
-        release {
-            storeFile rootProject.file(keystoreProps["storeFile"])
-            storePassword keystoreProps["storePassword"]
-            keyAlias keystoreProps["keyAlias"]
-            keyPassword keystoreProps["keyPassword"]
+        if (keystorePropsFile.exists()) {
+            release {
+                storeFile rootProject.file(keystoreProps["storeFile"])
+                storePassword keystoreProps["storePassword"]
+                keyAlias keystoreProps["keyAlias"]
+                keyPassword keystoreProps["keyPassword"]
+            }
         }
     }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            if (keystorePropsFile.exists()) {
+                signingConfig signingConfigs.release
+            }
         }
     }
     compileOptions {

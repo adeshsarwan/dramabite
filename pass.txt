@@ -1,4 +1,0 @@
-Keystore: jks/dramabitethebes.jks
-Alias: dramabitethebes
-Store Password: 7f8bca1bd7487dc9ebe25e28
-Key Password: 7f8bca1bd7487dc9ebe25e28
