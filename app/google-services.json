@@ -1,40 +1,21 @@
 {
   "project_info": {
-    "project_number": "461840726368",
-    "project_id": "dramabite-4a73d",
-    "storage_bucket": "dramabite-4a73d.firebasestorage.app"
+    "project_number": "000000000000",
+    "project_id": "todo-sip-firebase",
+    "storage_bucket": "todo-sip-firebase.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:461840726368:android:d9396414463a2bf9150605",
+        "mobilesdk_app_id": "1:000000000000:android:0000000000000000000000",
         "android_client_info": {
-          "package_name": "com.dramabite.app"
+          "package_name": "com.dramasip.thebes.app"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBEq8NrBjDP9OiChclNorY3FUZxEDvn1x0"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:461840726368:android:943fe1febf0e406c150605",
-        "android_client_info": {
-          "package_name": "com.dramabite.thebes.app"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBEq8NrBjDP9OiChclNorY3FUZxEDvn1x0"
+          "current_key": "TODO_REPLACE_WITH_FIREBASE_API_KEY"
         }
       ],
       "services": {

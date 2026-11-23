@@ -8,7 +8,7 @@ import com.tutorial.ui.theme.TutorialTheme
  * Light (white) theme for Splash / Language / Onboarding.
  */
 object DramaBiteTutorialTheme {
-    val BrandPrimary = Color(0xFFE9325A)
+    val BrandPrimary = Color(0xFF8E5CF7)
     val Background = Color(0xFFFFFFFF)
     val Surface = Color(0xFFFFFFFF)
     val SurfaceVariant = Color(0xFFF5F5F5)

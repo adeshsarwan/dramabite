@@ -52,5 +52,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "DramaBite"
+rootProject.name = "DramaSip"
 include ':app'

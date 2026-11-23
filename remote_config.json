@@ -1,14 +1,14 @@
 {
-  "test_id": false,
+  "test_id": true,
   "publisher_ad_units_manage": {
     "publisher_AppOpen_Ad_Id": [
       "ca-app-pub-3940256099942544/9257395921"
     ],
     "publisher_Native_Ad_Id": [
-      "ca-app-pub-2256714742649688/5571829750"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "publisher_Interstitial_Ad_Id": [
-      "ca-app-pub-2256714742649688/8197993097"
+      "ca-app-pub-3940256099942544/1033173712"
     ],
     "publisher_Banner_Ad_Id": [
       "ca-app-pub-3940256099942544/9214589741"
@@ -17,65 +17,65 @@
       "ca-app-pub-3940256099942544/5224354917"
     ],
     "splash_native": [
-      "ca-app-pub-2256714742649688/1221521202"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "splash_native_old": [
-      "ca-app-pub-2256714742649688/7595357868"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "splash_inter": [
-      "ca-app-pub-2256714742649688/3632062129"
+      "ca-app-pub-3940256099942544/1033173712"
     ],
     "splash_inter_old": [
-      "ca-app-pub-2256714742649688/3656112856"
+      "ca-app-pub-3940256099942544/1033173712"
     ],
     "lfo1_native": [
-      "ca-app-pub-2256714742649688/7722903266"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "lfo1_native_2": [
-      "ca-app-pub-2256714742649688/7722903266"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "lfo2_native": [
-      "ca-app-pub-2256714742649688/6409821592"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "lfo2_native_2": [
-      "ca-app-pub-2256714742649688/6409821592"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "lfo2_native_3": [
-      "ca-app-pub-2256714742649688/1005898785"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "onboard_1_native": [
-      "ca-app-pub-2256714742649688/5723425881"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "onboard_1_native_2": [
-      "ca-app-pub-2256714742649688/5723425881"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "onboard_2_native": [
-      "ca-app-pub-2256714742649688/5723425881"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "onboard_2_native_2": [
-      "ca-app-pub-2256714742649688/5723425881"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "onboard_3_native": [
-      "ca-app-pub-2256714742649688/3097262543"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "onboard_3_native_2": [
-      "ca-app-pub-2256714742649688/3097262543"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "onboard_3_native_3": [
-      "ca-app-pub-2256714742649688/3097262543"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "onboard_4_native": [
-      "ca-app-pub-2256714742649688/5312362340"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "onboard_4_native_2": [
-      "ca-app-pub-2256714742649688/5312362340"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "inter_onboard": [
-      "ca-app-pub-2256714742649688/8197993097"
+      "ca-app-pub-3940256099942544/1033173712"
     ],
     "splash_ads_show_type": "Inter",
     "home_native_col": [
-      "ca-app-pub-2256714742649688/5571829750"
+      "ca-app-pub-3940256099942544/2247696110"
     ],
     "home_new_native_ads_positions": 5,
     "home_ranking_native_ads_position": 5

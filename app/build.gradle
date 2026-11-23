@@ -17,16 +17,17 @@ android {
     compileSdk 37
 
     defaultConfig {
-        applicationId "com.dramabite.thebes.app"
+        applicationId "com.dramasip.thebes.app"
         minSdk 24
         targetSdk 36
-        versionCode 5
-        versionName "1.0.4"
+        versionCode 1
+        versionName "1.0.0"
 
-        buildConfigField "String", "ADJUST_TOKEN", "\"2fzc7iaq660w\""
-        buildConfigField "String", "FACEBOOK_APP_ID", "\"2467242803739932\""
-        buildConfigField "String", "ADJUST_EVENT_AD_REVENUE", "\"275dt7\""
-        buildConfigField "String", "ADJUST_EVENT_PURCHASE", "\"n210u8\""
+        // TODO(AAP010): Adjust / Facebook values from The Arrows (checklist rows 13-16)
+        buildConfigField "String", "ADJUST_TOKEN", "\"TODO_ADJUST_TOKEN\""
+        buildConfigField "String", "FACEBOOK_APP_ID", "\"TODO_FACEBOOK_APP_ID\""
+        buildConfigField "String", "ADJUST_EVENT_AD_REVENUE", "\"TODO_ADJUST_EVENT_AD_REVENUE\""
+        buildConfigField "String", "ADJUST_EVENT_PURCHASE", "\"TODO_ADJUST_EVENT_PURCHASE\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
