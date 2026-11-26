@@ -28,8 +28,14 @@ jobs:
             echo "::error::Add GPR_USER and GPR_TOKEN in Settings > Secrets and variables > Actions"
             exit 1
           fi
+          printf 'gpr.user=%s\ngpr.token=%s\n' "$GPR_USER" "$GPR_TOKEN" > local.properties
+          # Show whether this token can see The Arrows packages (no secrets printed)
+          for p in FirstOpenTutorial/com/tutorial/tutorial/maven-metadata.xml AdsSdk/com/arrows/ads/ads/maven-metadata.xml; do
+            code=$(curl -s -o /tmp/meta.xml -w '%{http_code}' -u "$GPR_USER:$GPR_TOKEN" "https://maven.pkg.github.com/The-Arrows-JSC/$p")
+            echo "GitHub Packages $p -> HTTP $code"; grep -o '<version>[^<]*</version>' /tmp/meta.xml | tail -5 || true
+          done
           chmod +x gradlew
-          ./gradlew assembleDebug --stacktrace -Pgpr.user="$GPR_USER" -Pgpr.token="$GPR_TOKEN"
+          ./gradlew assembleDebug --stacktrace
 
       - uses: actions/upload-artifact@v4
         with:
