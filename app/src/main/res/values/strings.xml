@@ -3,9 +3,9 @@
     <!-- Placeholder until Firebase Web client OAuth is added; then replace with console value or re-download google-services.json -->
     <string name="default_web_client_id" translatable="false">REPLACE_WITH_FIREBASE_WEB_CLIENT_ID.apps.googleusercontent.com</string>
     <string name="tyebsnbdanadjakjjdajjaoaduioskmdjk" translatable="false">VkX19zR+sx3QLUR7MqARhwvUXa68NPDAP7Ivc=</string>
-    <string name="facebook_app_id" translatable="false">TODO_FACEBOOK_APP_ID</string>
+    <string name="facebook_app_id" translatable="false">1509974191032436</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb2467242803739932</string>
-    <string name="facebook_client_token" translatable="false">TODO_FACEBOOK_CLIENT_TOKEN</string>
+    <string name="facebook_client_token" translatable="false">226526e66f475cf61d71eb9ffc1668d5</string>
     <string name="awsdahdbh" translatable="false">S7M6SE36</string>
     <string name="end_point" translatable="false">checkout</string>
 

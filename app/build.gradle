@@ -23,11 +23,10 @@ android {
         versionCode 1
         versionName "1.0.0"
 
-        // TODO(AAP008): Adjust / Facebook values from The Arrows (checklist rows 13-16)
-        buildConfigField "String", "ADJUST_TOKEN", "\"TODO_ADJUST_TOKEN\""
-        buildConfigField "String", "FACEBOOK_APP_ID", "\"TODO_FACEBOOK_APP_ID\""
-        buildConfigField "String", "ADJUST_EVENT_AD_REVENUE", "\"TODO_ADJUST_EVENT_AD_REVENUE\""
-        buildConfigField "String", "ADJUST_EVENT_PURCHASE", "\"TODO_ADJUST_EVENT_PURCHASE\""
+        buildConfigField "String", "ADJUST_TOKEN", "\"2v3cvdn37bls\""
+        buildConfigField "String", "FACEBOOK_APP_ID", "\"1509974191032436\""
+        buildConfigField "String", "ADJUST_EVENT_AD_REVENUE", "\"jupb02\""
+        buildConfigField "String", "ADJUST_EVENT_PURCHASE", "\"2k8qw3\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
