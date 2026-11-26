@@ -1,0 +1,38 @@
+name: Android build
+
+on:
+  push:
+    branches: ["app/**", "main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build debug APK
+        env:
+          GPR_USER: ${{ secrets.GPR_USER }}
+          GPR_TOKEN: ${{ secrets.GPR_TOKEN }}
+        run: |
+          if [ -z "$GPR_TOKEN" ]; then
+            echo "::error::Add GPR_USER and GPR_TOKEN in Settings > Secrets and variables > Actions"
+            exit 1
+          fi
+          chmod +x gradlew
+          ./gradlew assembleDebug --stacktrace -Pgpr.user="$GPR_USER" -Pgpr.token="$GPR_TOKEN"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: debug-apk
+          path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
