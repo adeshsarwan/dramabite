@@ -1,5 +1,6 @@
 package com.dramabite.thebes.app.activity.main.activity;
 
+import com.dramabite.thebes.app.tutorial.TutorialBootstrap;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
@@ -56,6 +57,7 @@ public class HomeScreenActivity extends BaseOtherActivity implements MyListFragm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TutorialBootstrap.syncLanguageFromAppLocale();
         binding = ActivityHomeScreenActvityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

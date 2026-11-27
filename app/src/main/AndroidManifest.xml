@@ -150,7 +150,7 @@
             android:name=".activity.main.activity.HomeScreenActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-        <!-- Host splash kept; SDK SplashActivity is LAUNCHER and forwards to SdkSplashActivity. -->
+        <!-- Kite's KiteSplashActivity (SDK manifest) is the LAUNCHER and forwards to SdkSplashActivity. -->
         <activity
             android:name=".activity.main.activity.SplashScreenActivity"
             android:exported="false"
@@ -160,17 +160,7 @@
             android:name=".tutorial.SdkSplashActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MyApp.TutorialDark" />
-        <activity
-            android:name=".tutorial.SdkLanguageActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.MyApp.TutorialLanguage" />
-        <activity
-            android:name=".tutorial.SdkOnboardingActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.MyApp.TutorialDark" />
+            android:theme="@style/Theme.Kite" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

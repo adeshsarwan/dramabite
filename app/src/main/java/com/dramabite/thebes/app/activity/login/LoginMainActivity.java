@@ -1,5 +1,6 @@
 package com.dramabite.thebes.app.activity.login;
 
+import com.dramabite.thebes.app.tutorial.TutorialBootstrap;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Insets;
@@ -36,7 +37,6 @@ import com.dramabite.thebes.app.ads.adsMenu.OnBoard.OnBoard4TwoNativeAdView;
 import com.dramabite.thebes.app.applicationPreference.ControlPreference;
 import com.dramabite.thebes.app.utils.coins.CoinsManager;
 import com.dramabite.thebes.app.databinding.ActivityLoginMainBinding;
-import com.tutorial.TutorialSdk;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -219,6 +219,7 @@ public class LoginMainActivity extends BaseOtherActivity {
         Intent signInIntent = authManager.getGoogleSignInIntent(this);
         if (signInIntent != null) {
             startGoogleSignInTimeout();
+            TutorialBootstrap.skipWelcomeBackOnce();
             googleSignInLauncher.launch(signInIntent);
         } else {
             showLoading(false);
@@ -253,11 +254,6 @@ public class LoginMainActivity extends BaseOtherActivity {
         }
         // Full first-open done (login or skip) — only now mark SDK onboarded → future Splash → Home.
         ControlPreference.setLoginScreen(true);
-        if (TutorialSdk.INSTANCE.isInitialized()) {
-            TutorialSdk.INSTANCE.getPrefs().setOnboarded(true);
-            TutorialSdk.INSTANCE.getNavigator().goHome(this);
-            return;
-        }
         Intent intent = new Intent(LoginMainActivity.this, HomeScreenActivity.class);
         // Clear splash/onboarding/login stack so Back from Home cannot return there
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

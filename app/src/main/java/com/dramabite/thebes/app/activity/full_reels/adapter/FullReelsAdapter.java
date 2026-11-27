@@ -1,5 +1,6 @@
 package com.dramabite.thebes.app.activity.full_reels.adapter;
 
+import com.dramabite.thebes.app.tutorial.TutorialBootstrap;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static android.view.View.VISIBLE;
 
@@ -907,6 +908,7 @@ public final class FullReelsAdapter extends RecyclerView.Adapter<FullReelsAdapte
 
                                 shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
+                                TutorialBootstrap.skipWelcomeBackOnce();
                                 context.startActivity(
                                         Intent.createChooser(shareIntent, "Share via")
                                 );

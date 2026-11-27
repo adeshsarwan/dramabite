@@ -35,7 +35,7 @@ public class ControllerApplication extends Application {
             AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(savedLanguage));
         }
 
-        // AdSdk → TutorialSdk (UMP / MobileAds owned by ads stack on SDK Splash when used)
+        // AdSdk → kite tutorial SDK (UMP / MobileAds handled on the kite Splash)
         TutorialBootstrap.INSTANCE.init(this);
     }
 

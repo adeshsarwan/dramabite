@@ -1,0 +1,172 @@
+{
+  "tut_policy": {
+    "ads_on": true,
+    "blocked_versions": [],
+    "inter_after_start_s": 5,
+    "inter_gap_s": 20
+  },
+  "tut_flow": {
+    "replay": true,
+    "skip_after_completions": 0,
+    "external_entry_skips": true,
+    "inter_timeout_ms": 10000,
+    "age_check": true,
+    "welcome_back": true
+  },
+  "splash_inter_timeout_seconds": "60",
+  "tut_lang_ui": {
+    "grouped": true,
+    "popup_s": 3,
+    "next_delay_s": 2,
+    "hand": {
+      "on": true,
+      "pos": 3,
+      "first_only": false
+    }
+  },
+  "tut_spl_native": {
+    "on": true,
+    "unit": "ca-app-pub-2256714742649688/9931826640",
+    "layout": "medium",
+    "bg": "#0B0628",
+    "border": "",
+    "cta": "#F05A1A",
+    "retry_max": 1,
+    "retry_delay_s": 1,
+    "is_reload": false,
+    "time_reload": 10,
+    "is_collapsible": false
+  },
+  "tut_spl_inter": {
+    "on": true,
+    "unit": "ca-app-pub-2256714742649688/2053336626",
+    "end_card": true
+  },
+  "tut_spl_endcard": {
+    "on": true,
+    "unit": "ca-app-pub-2256714742649688/5801009947",
+    "layout": "end_card",
+    "bg": "#0B0628",
+    "border": "",
+    "cta": "#F05A1A",
+    "retry_max": 1,
+    "retry_delay_s": 1,
+    "is_reload": false,
+    "time_reload": 10,
+    "is_collapsible": false
+  },
+  "tut_lang_native": {
+    "layout": "medium_cta_top",
+    "bg": "#0B0628",
+    "border": "",
+    "cta": "#F05A1A",
+    "retry_max": 1,
+    "retry_delay_s": 1,
+    "is_reload": false,
+    "time_reload": 10,
+    "is_collapsible": false,
+    "slots": {
+      "lfo1": {
+        "on": true,
+        "unit_first": "ca-app-pub-2256714742649688/4002723443",
+        "unit_repeat": "ca-app-pub-2256714742649688/5609438254",
+        "cta": "#828282"
+      },
+      "lfo2": {
+        "on": true,
+        "unit_first": "ca-app-pub-2256714742649688/1513572733",
+        "unit_repeat": "ca-app-pub-2256714742649688/8044029906"
+      },
+      "lfo3": {
+        "on": true,
+        "unit_first": "ca-app-pub-2256714742649688/9063478435",
+        "unit_repeat": "ca-app-pub-2256714742649688/7141303930"
+      }
+    }
+  },
+  "tut_onb_native": {
+    "layout": "small",
+    "bg": "#0B0628",
+    "border": "",
+    "cta": "#F05A1A",
+    "retry_max": 1,
+    "retry_delay_s": 1,
+    "is_reload": false,
+    "time_reload": 10,
+    "is_collapsible": false,
+    "slots": {
+      "onb1": {
+        "on": true,
+        "unit_first": "ca-app-pub-2256714742649688/8782396500",
+        "unit_repeat": "ca-app-pub-2256714742649688/7277743141"
+      },
+      "onb4": {
+        "on": true,
+        "unit_first": "ca-app-pub-2256714742649688/3619580060",
+        "unit_repeat": "ca-app-pub-2256714742649688/3757300536"
+      }
+    }
+  },
+  "tut_onb_full": {
+    "on": true,
+    "unit": "ca-app-pub-2256714742649688/8399253129",
+    "layout": "full",
+    "bg": "#0B0628",
+    "border": "",
+    "cta": "#F05A1A",
+    "retry_max": 1,
+    "retry_delay_s": 1,
+    "is_reload": false,
+    "time_reload": 10,
+    "is_collapsible": false
+  },
+  "tut_onb_inter": {
+    "on": true,
+    "unit": "ca-app-pub-2256714742649688/3948164388",
+    "end_card": true
+  },
+  "tut_onb_endcard": {
+    "on": true,
+    "unit": "ca-app-pub-2256714742649688/1901293382",
+    "layout": "end_card",
+    "bg": "#0B0628",
+    "border": "",
+    "cta": "#F05A1A",
+    "retry_max": 1,
+    "retry_delay_s": 1,
+    "is_reload": false,
+    "time_reload": 10,
+    "is_collapsible": false
+  },
+  "tut_age_native": {
+    "on": true,
+    "unit": "ca-app-pub-2256714742649688/3885293049",
+    "layout": "medium",
+    "bg": "#0B0628",
+    "border": "",
+    "cta": "#F05A1A",
+    "retry_max": 1,
+    "retry_delay_s": 1,
+    "is_reload": false,
+    "time_reload": 10,
+    "is_collapsible": false
+  },
+  "tut_wcb_inter": {
+    "on": true,
+    "unit": "ca-app-pub-2256714742649688/4493678030",
+    "end_card": false
+  },
+  "tut_wcb_native": {
+    "on": true,
+    "unit": "ca-app-pub-2256714742649688/6191892181",
+    "layout": "large_cta_top",
+    "bg": "#0B0628",
+    "border": "",
+    "cta": "#F05A1A",
+    "retry_max": 1,
+    "retry_delay_s": 1,
+    "is_reload": false,
+    "time_reload": 10,
+    "is_collapsible": false
+  }
+}

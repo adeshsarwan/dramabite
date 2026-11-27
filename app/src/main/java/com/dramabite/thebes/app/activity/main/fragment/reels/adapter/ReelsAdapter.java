@@ -1,5 +1,6 @@
 package com.dramabite.thebes.app.activity.main.fragment.reels.adapter;
 
+import com.dramabite.thebes.app.tutorial.TutorialBootstrap;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static android.view.View.VISIBLE;
 
@@ -1254,6 +1255,7 @@ public void onPlayWhenReadyChanged(boolean playWhenReady, int reason) {
 
                                 shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
+                                TutorialBootstrap.skipWelcomeBackOnce();
                                 context.startActivity(
                                         Intent.createChooser(shareIntent, "Share via")
                                 );
