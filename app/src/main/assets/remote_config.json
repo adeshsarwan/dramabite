@@ -211,17 +211,17 @@
     "weekly_membership": {
       "main_price": 129,
       "discount_price": "-",
-      "title": "₹129.00/week for the first 3 weeks, then ₹999.00/week"
+      "title": "7-day VIP pass · one-time payment, no auto-renew"
     },
     "monthly_membership": {
       "main_price": 349,
       "discount_price": "-",
-      "title": "₹349.00 per month, Save more with monthly plan"
+      "title": "30-day VIP pass · one-time payment, no auto-renew"
     },
     "yearly_membership": {
       "main_price": 1499,
       "discount_price": "-",
-      "title": "₹1,499.00 per year. Save more with yearly plan."
+      "title": "365-day VIP pass · best value, no auto-renew"
     }
   },
   "usd_premium_plan_details": {
@@ -248,17 +248,17 @@
     "weekly_membership": {
       "main_price": 9.99,
       "discount_price": "-",
-      "title": "$9.99/week for the first 3 weeks, then $9.00/week"
+      "title": "7-day VIP pass · one-time payment, no auto-renew"
     },
     "monthly_membership": {
       "main_price": 19.99,
       "discount_price": "-",
-      "title": "$19.99.00 per month, Save more with monthly plan"
+      "title": "30-day VIP pass · one-time payment, no auto-renew"
     },
     "yearly_membership": {
       "main_price": 39.99,
       "discount_price": "-",
-      "title": "$39.99.00 per year. Save more with yearly plan"
+      "title": "365-day VIP pass · best value, no auto-renew"
     }
   },
   "time_show_inter_home": 10,
