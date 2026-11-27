@@ -11,8 +11,6 @@ import com.dramabite.thebes.app.activity.full_reels.ReelsShowActivity
 import com.dramabite.thebes.app.activity.login.LoginMainActivity
 import com.dramabite.thebes.app.activity.login.OtpReceiveScreen
 import com.dramabite.thebes.app.activity.main.activity.HomeScreenActivity
-import com.dramabite.thebes.app.activity.payment.CheckoutActivity
-import com.dramabite.thebes.app.activity.payment.PaymentIntegrationScreen
 import com.dramabite.thebes.app.activity.premium.PremiumActivity
 import com.dramabite.thebes.app.activity.premium.PremiumMemberActivity
 import com.dramabite.thebes.app.activity.premium.TopUpActivity
@@ -39,8 +37,6 @@ object TutorialBootstrap {
             homeActivity = HomeScreenActivity::class
 
             welcomeExcludedActivities += ReelsShowActivity::class
-            welcomeExcludedActivities += CheckoutActivity::class
-            welcomeExcludedActivities += PaymentIntegrationScreen::class
             welcomeExcludedActivities += PremiumActivity::class
             welcomeExcludedActivities += PremiumMemberActivity::class
             welcomeExcludedActivities += TopUpActivity::class
