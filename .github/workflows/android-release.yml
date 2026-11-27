@@ -43,11 +43,19 @@ jobs:
           mkdir -p "$(dirname "$store")"
           echo "$JKS_B64" | base64 -d > "$store"
           chmod +x gradlew
-          ./gradlew bundleRelease --stacktrace
+          ./gradlew bundleRelease assembleRelease --stacktrace
           rm -f keystore.properties "$store" local.properties
 
       - uses: actions/upload-artifact@v4
         with:
           name: release-aab
           path: app/build/outputs/bundle/release/*.aab
+          if-no-files-found: ignore
+
+      # Upload-key-signed APK for Firebase App Distribution / sideload testing
+      # (Play-signed universal APKs carry Play's installer check and refuse to run when sideloaded).
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          path: app/build/outputs/apk/release/*.apk
           if-no-files-found: ignore
