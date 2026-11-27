@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Override Tutorial SDK native CTA pill to match the onboarding Next button. -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <solid android:color="@color/app_colors" />
-    <corners android:radius="25dp" />
-</shape>
