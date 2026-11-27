@@ -178,8 +178,8 @@
   "after_login_ads_show": false,
   "exo_player_ima_show": false,
   "exo_player_ima_ads_count": 4,
-  "url_privacy_policy": "https://sites.google.com/view/dramamunch",
-  "url_help_feedback": "https://sites.google.com/view/dramamunch",
+  "url_privacy_policy": "https://ignia.cc/apps/dramamunch/privacy-policy",
+  "url_help_feedback": "https://ignia.cc/apps/dramamunch/terms-of-service",
   "engine_box": {
     "main_base_url": "https://api.rovedata.xyz/",
     "main_ak": "P6qA7KtPgjqc",
