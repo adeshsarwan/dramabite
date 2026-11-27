@@ -2,7 +2,7 @@
     <string name="app_tagline">Short dramas you can\'t stop munching</string>
     <string name="app_name" translatable="false">DramaMunch</string>
     <!-- Placeholder until Firebase Web client OAuth is added; then replace with console value or re-download google-services.json -->
-    <string name="default_web_client_id" translatable="false">REPLACE_WITH_FIREBASE_WEB_CLIENT_ID.apps.googleusercontent.com</string>
+    <string name="default_web_client_id" translatable="false">1008910255873-4ne0bpdkc6sau6qrqb6r7g0hjc7q8e3n.apps.googleusercontent.com</string>
     <string name="tyebsnbdanadjakjjdajjaoaduioskmdjk" translatable="false">VkX19zR+sx3QLUR7MqARhwvUXa68NPDAP7Ivc=</string>
     <string name="facebook_app_id" translatable="false">1509974191032436</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb2467242803739932</string>

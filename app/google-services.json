@@ -1,26 +1,44 @@
 {
   "project_info": {
-    "project_number": "000000000000",
-    "project_id": "todo-munch-firebase",
-    "storage_bucket": "todo-munch-firebase.firebasestorage.app"
+    "project_number": "1008910255873",
+    "project_id": "dramamunch-66017",
+    "storage_bucket": "dramamunch-66017.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:000000000000:android:0000000000000000000000",
+        "mobilesdk_app_id": "1:1008910255873:android:46ccc6a2f775204139fd00",
         "android_client_info": {
           "package_name": "com.dramamunch.thebes.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1008910255873-gadovbjbu55d30ascmda8cgc2h72dmv9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dramamunch.thebes.app",
+            "certificate_hash": "01bc41477f7953ad4ff35ebb92fadcc354665e92"
+          }
+        },
+        {
+          "client_id": "1008910255873-4ne0bpdkc6sau6qrqb6r7g0hjc7q8e3n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "TODO_REPLACE_WITH_FIREBASE_API_KEY"
+          "current_key": "AIzaSyC3X68GiMmJ4Nz51TE6hleIwIsD4mOFM8g"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1008910255873-4ne0bpdkc6sau6qrqb6r7g0hjc7q8e3n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
