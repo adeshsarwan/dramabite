@@ -1,0 +1,53 @@
+name: Android release (signed AAB)
+
+on:
+  push:
+    branches: ["app/**"]
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pick signing secrets for this app
+        id: app
+        run: |
+          key=$(echo "${GITHUB_REF_NAME}" | grep -o 'AAP[0-9]*' || true)
+          echo "key=$key" >> "$GITHUB_OUTPUT"
+          echo "App key: ${key:-none}"
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build signed release bundle
+        env:
+          GPR_USER: ${{ secrets.GPR_USER }}
+          GPR_TOKEN: ${{ secrets.GPR_TOKEN }}
+          JKS_B64: ${{ secrets[format('RELEASE_JKS_{0}', steps.app.outputs.key)] }}
+          KS_PROPS: ${{ secrets[format('RELEASE_PROPS_{0}', steps.app.outputs.key)] }}
+        run: |
+          if [ -z "$JKS_B64" ] || [ -z "$KS_PROPS" ]; then
+            echo "::warning::No RELEASE_JKS_${{ steps.app.outputs.key }} / RELEASE_PROPS_${{ steps.app.outputs.key }} secrets; skipping signed build."
+            exit 0
+          fi
+          printf 'gpr.user=%s\ngpr.token=%s\n' "$GPR_USER" "$GPR_TOKEN" > local.properties
+          printf '%s\n' "$KS_PROPS" > keystore.properties
+          store=$(grep '^storeFile=' keystore.properties | cut -d= -f2-)
+          mkdir -p "$(dirname "$store")"
+          echo "$JKS_B64" | base64 -d > "$store"
+          chmod +x gradlew
+          ./gradlew bundleRelease --stacktrace
+          rm -f keystore.properties "$store" local.properties
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-aab
+          path: app/build/outputs/bundle/release/*.aab
+          if-no-files-found: ignore
