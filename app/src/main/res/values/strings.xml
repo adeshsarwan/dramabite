@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">DramaSip</string>
     <!-- Placeholder until Firebase Web client OAuth is added; then replace with console value or re-download google-services.json -->
-    <string name="default_web_client_id" translatable="false">REPLACE_WITH_FIREBASE_WEB_CLIENT_ID.apps.googleusercontent.com</string>
+    <string name="default_web_client_id" translatable="false">811079023205-re5jna7qlrufmiiiirp57u60r8e5mljs.apps.googleusercontent.com</string>
     <string name="tyebsnbdanadjakjjdajjaoaduioskmdjk" translatable="false">VkX19zR+sx3QLUR7MqARhwvUXa68NPDAP7Ivc=</string>
     <string name="facebook_app_id" translatable="false">1724639042608996</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb2467242803739932</string>

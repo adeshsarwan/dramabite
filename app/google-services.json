@@ -1,26 +1,44 @@
 {
   "project_info": {
-    "project_number": "000000000000",
-    "project_id": "todo-sip-firebase",
-    "storage_bucket": "todo-sip-firebase.firebasestorage.app"
+    "project_number": "811079023205",
+    "project_id": "dramasip-6cc01",
+    "storage_bucket": "dramasip-6cc01.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:000000000000:android:0000000000000000000000",
+        "mobilesdk_app_id": "1:811079023205:android:e0de6fa94cfa5e749be48c",
         "android_client_info": {
           "package_name": "com.dramasip.thebes.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "811079023205-sinpcu626mm8rfkhog0ftcvbgtlphsdd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dramasip.thebes.app",
+            "certificate_hash": "001d980fa86b020fb3d6aa2eed6b3a9290bf110c"
+          }
+        },
+        {
+          "client_id": "811079023205-re5jna7qlrufmiiiirp57u60r8e5mljs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "TODO_REPLACE_WITH_FIREBASE_API_KEY"
+          "current_key": "AIzaSyBeHWo9Fwzzw56aaG2oFxzvP7COrZXNpXA"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "811079023205-re5jna7qlrufmiiiirp57u60r8e5mljs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
