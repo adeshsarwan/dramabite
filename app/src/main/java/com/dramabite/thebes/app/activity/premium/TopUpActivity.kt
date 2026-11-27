@@ -20,35 +20,20 @@ import com.dramabite.thebes.app.activity.main.base.BaseOtherActivity
 import com.dramabite.thebes.app.ads.PremiumPlanManager
 import com.dramabite.thebes.app.ads.PremiumPlanManager.SavePremiumCallback
 import com.dramabite.thebes.app.ads.RewardAdManager
+import com.dramabite.thebes.app.billing.PlayBilling
 import com.dramabite.thebes.app.applicationPreference.ControlPreference
 import com.dramabite.thebes.app.databinding.ActivityTopUpBinding
 import com.dramabite.thebes.app.utils.TimerManager
 import com.dramabite.thebes.app.utils.coins.CoinsManager
-import com.stripe.android.PaymentConfiguration
-import com.stripe.android.paymentsheet.PaymentSheet
-import com.stripe.android.paymentsheet.PaymentSheet.CustomerConfiguration
-import com.stripe.android.paymentsheet.PaymentSheetResult
-import com.stripe.android.paymentsheet.PaymentSheetResultCallback
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.FormBody
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
 import org.json.JSONException
 import org.json.JSONObject
-import java.io.IOException
 
 class TopUpActivity : BaseOtherActivity() {
     lateinit var binding: ActivityTopUpBinding
-    private val http = OkHttpClient()
     private val mainHandler = Handler(Looper.getMainLooper())
     val EPISODE_COIN_COST: Long = 20L
     private var isPaymentProcessing = false
 
-    private lateinit var paymentSheet: PaymentSheet
-    private lateinit var customerConfig: CustomerConfiguration
-    private lateinit var paymentIntentClientSecret: String
 
     private var pendingPurchaseType = 0
     private var pendingCoinsToAdd = 0L
@@ -69,13 +54,7 @@ class TopUpActivity : BaseOtherActivity() {
         binding.btnBack.setOnClickListener {
             finish()
         }
-        paymentSheet = PaymentSheet(
-            this,
-            PaymentSheetResultCallback { result: PaymentSheetResult ->
-                this.onPaymentSheetResult(
-                    result
-                )
-            })
+        PlayBilling.init(this)
 
         val pack1: View? = findViewById<View?>(R.id.pack1)
         val pack2: View? = findViewById<View?>(R.id.pack2)
@@ -87,6 +66,7 @@ class TopUpActivity : BaseOtherActivity() {
             findViewById<View?>(R.id.relativeYearlyMemberShip)
 
         setPremiumPlans()
+        PlayBilling.whenPricesReady(this) { applyPlayPrices() }
 
 
         val remaining = TimerManager.getRemainingTime(this)
@@ -379,6 +359,23 @@ class TopUpActivity : BaseOtherActivity() {
         super.onBackPressed()
     }
 
+    /** Shows the Google Play price (in the user's currency) on each pack and pass. */
+    private fun applyPlayPrices() {
+        if (isFinishing) return
+        val pairs = listOf(
+            R.id.textPrice1 to RewardAdManager.PURCHASE_TYPE_COINS_PACK_1,
+            R.id.textPrice2 to RewardAdManager.PURCHASE_TYPE_COINS_PACK_2,
+            R.id.textPrice3 to RewardAdManager.PURCHASE_TYPE_COINS_PACK_3,
+            R.id.textPrice4 to RewardAdManager.PURCHASE_TYPE_COINS_PACK_4,
+            R.id.tvWeeklyMemberShip1 to RewardAdManager.PURCHASE_TYPE_WEEKLY,
+            R.id.tvYearlyMemberShip1 to RewardAdManager.PURCHASE_TYPE_YEARLY,
+        )
+        for ((viewId, type) in pairs) {
+            val price = PlayBilling.formattedPrice(type) ?: continue
+            findViewById<TextView>(viewId)?.text = price
+        }
+    }
+
     private fun startStripePayment(
         activity: Activity,
         amount: Float,
@@ -387,127 +384,32 @@ class TopUpActivity : BaseOtherActivity() {
         priceForPremium: Double,
 
         ) {
-        if (paymentSheet == null) {
-            Toast.makeText(this@TopUpActivity, "Stripe not initialized yet", Toast.LENGTH_SHORT)
-                .show()
-            return
-        }
-
-
         pendingPurchaseType = purchaseType
         pendingCoinsToAdd = coinsToAdd
-        pendingPrice = priceForPremium
+        val playPrice = PlayBilling.priceAmount(purchaseType)
+        pendingPrice = if (playPrice > 0.0) playPrice else priceForPremium
 
-        validateFromServerAndPresent(activity, amount)
-    }
-
-    private fun validateFromServerAndPresent(activity: Activity, amount: Float) {
-        val apiUrl: String =
-            ControlPreference.getTransactionUrl() + this@TopUpActivity.getString(R.string.end_point)
-        val country = ControlPreference.getCountryName()
-        val currency =
-            if (country != null && country.equals("IN", ignoreCase = true)) "inr" else "usd"
-        val userId = FirebaseAuth.getInstance().getUid()
-        val user = FirebaseAuth.getInstance().getCurrentUser()
-        val email =
-            if (user != null && user.getEmail() != null) user.getEmail() else "user@example.com"
-        val name = if (user != null && user.getDisplayName() != null)
-            user.getDisplayName()
-        else
-            (if (email!!.contains("@")) email.substring(0, email.indexOf('@')) else "User")
-
-        val amountSmallestUnit = (amount * 100f).toLong()
-        val body = FormBody.Builder()
-            .add("amount", amountSmallestUnit.toString())
-            .add("currency", currency)
-            .add("email", email!!)
-            .add("name", name!!)
-            .add("user_id", userId.toString())
-
-            .build()
-
-        val request = Request.Builder()
-            .url(apiUrl)
-            .post(body)
-            .build()
-
-        http.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                mainHandler.post(Runnable {
-                    Toast.makeText(
-                        this@TopUpActivity,
-                        getString(R.string.payment_init_failed),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                })
+        PlayBilling.purchase(activity, purchaseType, object : PlayBilling.Listener {
+            override fun onPurchased(purchaseType: Int) {
+                isPaymentProcessing = false
+                onStripePaymentCompleted()
             }
 
-            override fun onResponse(call: Call, response: Response) {
-                try {
-                    response.use { r ->
-                        val json = if (r.body != null) r.body!!.string() else ""
-                        val responseJson = JSONObject(json)
-                        paymentIntentClientSecret = responseJson.getString("paymentIntent")
-                        val customerId = responseJson.getString("customer")
-                        val ephemeralKeySecret = responseJson.getString("ephemeralKey")
-                        val publishableKey = responseJson.getString("publishableKey")
-                        customerConfig = CustomerConfiguration(customerId, ephemeralKeySecret)
-                        mainHandler.post(Runnable {
-                            try {
-                                PaymentConfiguration.init(
-                                    activity.getApplicationContext(),
-                                    publishableKey
-                                )
-                                val configuration =
-                                    PaymentSheet.Configuration.Builder("DramaBite")
-                                        .customer(customerConfig)
-                                        .allowsDelayedPaymentMethods(true)
-                                        .build()
-                                paymentSheet.presentWithPaymentIntent(
-                                    paymentIntentClientSecret,
-                                    configuration
-                                )
-                            } catch (e: java.lang.Exception) {
-                                Toast.makeText(
-                                    this@TopUpActivity,
-                                    "Stripe error",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        })
-                    }
-                } catch (e: java.lang.Exception) {
-                    mainHandler.post(Runnable {
-                        Toast.makeText(
-                            this@TopUpActivity,
-                            getString(R.string.payment_init_failed),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    })
-                }
+            override fun onCancelled() {
+                isPaymentProcessing = false
+                Toast.makeText(this@TopUpActivity, getString(R.string.payment_cancelled), Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFailed(message: String) {
+                isPaymentProcessing = false
+                Toast.makeText(this@TopUpActivity, getString(R.string.payment_failed) + ": " + message, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onPending() {
+                isPaymentProcessing = false
+                Toast.makeText(this@TopUpActivity, getString(R.string.payment_pending), Toast.LENGTH_LONG).show()
             }
         })
-    }
-
-    private fun onPaymentSheetResult(paymentSheetResult: PaymentSheetResult) {
-        if (paymentSheetResult is PaymentSheetResult.Completed) {
-            isPaymentProcessing = false
-
-            onStripePaymentCompleted()
-        } else if (paymentSheetResult is PaymentSheetResult.Canceled) {
-            isPaymentProcessing = false
-
-            Toast.makeText(this@TopUpActivity, getString(R.string.payment_cancelled), Toast.LENGTH_SHORT).show()
-        } else if (paymentSheetResult is PaymentSheetResult.Failed) {
-            isPaymentProcessing = false
-
-            val failed = paymentSheetResult
-            Toast.makeText(
-                this@TopUpActivity,
-                getString(R.string.payment_failed) + ": " + (if (failed.error != null) failed.error.message else ""),
-                Toast.LENGTH_SHORT
-            ).show()
-        }
     }
 
     private fun onStripePaymentCompleted() {

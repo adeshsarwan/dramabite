@@ -13,7 +13,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.dramabite.thebes.app.R;
 import com.dramabite.thebes.app.activity.main.base.BaseOtherActivity;
-import com.dramabite.thebes.app.activity.payment.TransactionHistoryScreen;
 import com.dramabite.thebes.app.activity.premium.ConsumptionRewardScreen;
 import com.dramabite.thebes.app.activity.premium.TopUpActivity;
 import com.dramabite.thebes.app.databinding.ActivityMyWalletBinding;
@@ -39,8 +38,13 @@ public class MyWalletActivity extends BaseOtherActivity {
         binding.imageTransactionHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyWalletActivity.this, TransactionHistoryScreen.class);
-                startActivity(intent);
+                // Purchases go through Google Play; show the user's Play order history.
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        android.net.Uri.parse("https://play.google.com/store/account/orderhistory"));
+                try {
+                    startActivity(intent);
+                } catch (android.content.ActivityNotFoundException ignored) {
+                }
 
             }
         });
