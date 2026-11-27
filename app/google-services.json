@@ -1,26 +1,44 @@
 {
   "project_info": {
-    "project_number": "000000000000",
-    "project_id": "todo-nibble-firebase",
-    "storage_bucket": "todo-nibble-firebase.firebasestorage.app"
+    "project_number": "412694880810",
+    "project_id": "dramanibble",
+    "storage_bucket": "dramanibble.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:000000000000:android:0000000000000000000000",
+        "mobilesdk_app_id": "1:412694880810:android:94812d6ff88e4f0ee05953",
         "android_client_info": {
           "package_name": "com.dramanibble.thebes.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "412694880810-jn1eovsrejsnaj61comprhf2crn47u4m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dramanibble.thebes.app",
+            "certificate_hash": "816a4abf4cf42f54675af4862edf54eef08f2ce9"
+          }
+        },
+        {
+          "client_id": "412694880810-7lsf544c11jnooffrual4hhqqie1kajj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "TODO_REPLACE_WITH_FIREBASE_API_KEY"
+          "current_key": "AIzaSyD6UKJRvXeD6UAQWE5626BKzC3IXNkhPhU"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412694880810-7lsf544c11jnooffrual4hhqqie1kajj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

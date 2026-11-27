@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">DramaNibble</string>
     <!-- Placeholder until Firebase Web client OAuth is added; then replace with console value or re-download google-services.json -->
-    <string name="default_web_client_id" translatable="false">REPLACE_WITH_FIREBASE_WEB_CLIENT_ID.apps.googleusercontent.com</string>
+    <string name="default_web_client_id" translatable="false">412694880810-7lsf544c11jnooffrual4hhqqie1kajj.apps.googleusercontent.com</string>
     <string name="tyebsnbdanadjakjjdajjaoaduioskmdjk" translatable="false">VkX19zR+sx3QLUR7MqARhwvUXa68NPDAP7Ivc=</string>
     <string name="facebook_app_id" translatable="false">2568046843706275</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb2467242803739932</string>
