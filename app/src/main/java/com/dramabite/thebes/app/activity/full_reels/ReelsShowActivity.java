@@ -53,8 +53,6 @@ import com.dramabite.thebes.app.activity.main.fragment.reels.interfaces.PipPlaye
 import com.dramabite.thebes.app.model.SliderItemModel;
 import com.dramabite.thebes.app.mvvmRepo.model.RankingSeriesViewModel;
 import com.dramabite.thebes.app.mvvmRepo.model.SeriesViewModel;
-import com.stripe.android.paymentsheet.PaymentSheet;
-import com.stripe.android.paymentsheet.PaymentSheetResult;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -71,7 +69,6 @@ public class ReelsShowActivity extends AppCompatActivity implements PipPlayerLis
     private ActivityResultLauncher<Intent> infoLauncher;
     String SERIES_ID_EXTRA = "";
     private ExoPlayer currentPlayer;
-    private PaymentSheet paymentSheet;
     private BroadcastReceiver pipStopReceiver;
     private int lastPlayedPosition = -1;
     private ReelsInterstitialManager interstitialManager;
@@ -247,7 +244,7 @@ public class ReelsShowActivity extends AppCompatActivity implements PipPlayerLis
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        paymentSheet = new PaymentSheet(this, this::onPaymentSheetResult);
+        com.dramabite.thebes.app.billing.PlayBilling.init(this);
         instance = this;
         getOnBackPressedDispatcher().addCallback(this,new OnBackPressedCallback(true) {
             @Override
@@ -401,9 +398,6 @@ public class ReelsShowActivity extends AppCompatActivity implements PipPlayerLis
                             infoLauncher,
                             1
                     );
-                    if (adapter.getRewardUnlocker() != null) {
-                        adapter.getRewardUnlocker().setPaymentSheet(paymentSheet);
-                    }
 
                     binding.reelsRecyclerView.setAdapter(adapter);
                     fetchMyListEpisodes();
@@ -475,12 +469,6 @@ public class ReelsShowActivity extends AppCompatActivity implements PipPlayerLis
         };
 
         viewModel.getSeriesLiveData().observe(this, observer);
-    }
-    private void onPaymentSheetResult(PaymentSheetResult result) {
-        FullReelsAdapter a = getSeriesReelsAdapter();
-        if (a != null && a.getRewardUnlocker() != null) {
-            a.getRewardUnlocker().handlePaymentSheetResult(result);
-        }
     }
 
     private void fetchMyListEpisodes() {
