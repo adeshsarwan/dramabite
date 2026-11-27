@@ -83,6 +83,7 @@
     <string name="payment_cancelled">Payment cancelled</string>
     <string name="payment_id_copied">Payment ID Copied</string>
     <string name="payment_failed">Payment failed</string>
+    <string name="payment_pending">Payment pending. Your purchase will be added once the payment completes.</string>
     <string name="ok">OK</string>
     <string name="stripe_checkout">Checkout</string>
     <string name="login">Login</string>

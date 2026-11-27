@@ -35,12 +35,10 @@ import com.dramabite.thebes.app.R;
 import com.dramabite.thebes.app.activity.login.LoginMainActivity;
 import com.dramabite.thebes.app.activity.premium.TopUpActivity;
 import com.dramabite.thebes.app.applicationPreference.ControlPreference;
+import com.dramabite.thebes.app.billing.PlayBilling;
 import com.dramabite.thebes.app.utils.coins.CoinsManager;
 import com.dramabite.thebes.app.databinding.ItemReelBinding;
 import com.dramabite.thebes.app.engineBox.model.detail.ShortDetailModel;
-import com.stripe.android.PaymentConfiguration;
-import com.stripe.android.paymentsheet.PaymentSheet;
-import com.stripe.android.paymentsheet.PaymentSheetResult;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -106,9 +104,6 @@ public class RewardAdManager {
     private final OkHttpClient http = new OkHttpClient();
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
-    private PaymentSheet paymentSheet;
-    private PaymentSheet.CustomerConfiguration customerConfig;
-    private String paymentIntentClientSecret;
 
     private BottomSheetDialog pendingStripeDialog;
     private ExoPlayer pendingStripePlayer;
@@ -117,13 +112,6 @@ public class RewardAdManager {
     private long pendingCoinsToAdd = 0L;
     private double pendingPrice = 0.0;
 
-    public void setPaymentSheet(@NonNull PaymentSheet sheet) {
-        this.paymentSheet = sheet;
-    }
-
-    public void handlePaymentSheetResult(@NonNull PaymentSheetResult paymentSheetResult) {
-        onPaymentSheetResult(paymentSheetResult);
-    }
 
     public static void RewardAdsId(List<String> list) {
         try {
@@ -154,10 +142,6 @@ public class RewardAdManager {
             ExoPlayer player,
             ItemReelBinding reelBinding
     ) {
-        if (paymentSheet == null) {
-            Toast.makeText(context, "Stripe not initialized yet", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
         pendingStripeDialog = dialog;
         pendingStripePlayer = player;
@@ -166,88 +150,51 @@ public class RewardAdManager {
         pendingCoinsToAdd = coinsToAdd;
         pendingPrice = priceForPremium;
 
-        validateFromServerAndPresent(activity, amount);
-    }
+        double playPrice = PlayBilling.priceAmount(purchaseType);
+        if (playPrice > 0.0) pendingPrice = playPrice;
 
-    private void validateFromServerAndPresent(@NonNull Activity activity, float amount) {
-        String apiUrl = ControlPreference.getTransactionUrl() + context.getString(R.string.end_point);
-        String country = ControlPreference.getCountryName();
-        String currency = country != null && country.equalsIgnoreCase("IN") ? "inr" : "usd";
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String email = user != null && user.getEmail() != null ? user.getEmail() : "user@example.com";
-        String name = user != null && user.getDisplayName() != null ? user.getDisplayName()
-                : (email.contains("@") ? email.substring(0, email.indexOf('@')) : "User");
-
-        long amountSmallestUnit = (long) (amount * 100f);
-
-//        FormBody body = new FormBody.Builder()
-//                .add("amount", String.valueOf(amountSmallestUnit))
-//                .add("currency", currency)
-//                .add("email", email)
-//                .add("name", name)
-//                .build();
-        FormBody body = new FormBody.Builder()
-                .add("amount", String.valueOf(amountSmallestUnit))
-                .add("currency", currency)
-                .add("email", email)
-                .add("name", name)
-                .add("user_id", String.valueOf(user))
-                .build();
-
-        Request request = new Request.Builder()
-                .url(apiUrl)
-                .post(body)
-                .build();
-
-        http.newCall(request).enqueue(new Callback() {
+        PlayBilling.purchase(activity, purchaseType, new PlayBilling.Listener() {
             @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                mainHandler.post(() -> Toast.makeText(context, "Payment init failed", Toast.LENGTH_SHORT).show());
+            public void onPurchased(int type) {
+                onStripePaymentCompleted();
+                isPaymentProcessing = false;
             }
 
             @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) {
-                try (Response r = response) {
-                    String json = r.body() != null ? r.body().string() : "";
-                    JSONObject responseJson = new JSONObject(json);
-                    paymentIntentClientSecret = responseJson.getString("paymentIntent");
-                    String customerId = responseJson.getString("customer");
-                    String ephemeralKeySecret = responseJson.getString("ephemeralKey");
-                    String publishableKey = responseJson.getString("publishableKey");
-                    customerConfig = new PaymentSheet.CustomerConfiguration(customerId, ephemeralKeySecret);
+            public void onCancelled() {
+                isPaymentProcessing = false;
+                Toast.makeText(context, context.getString(R.string.payment_cancelled), Toast.LENGTH_SHORT).show();
+            }
 
-                    mainHandler.post(() -> {
-                        try {
-                            PaymentConfiguration.init(activity.getApplicationContext(), publishableKey);
-                            PaymentSheet.Configuration configuration =
-                                    new PaymentSheet.Configuration.Builder("DramaBite")
-                                            .customer(customerConfig)
-                                            .allowsDelayedPaymentMethods(true)
-                                            .build();
-                            paymentSheet.presentWithPaymentIntent(paymentIntentClientSecret, configuration);
-                        } catch (Exception e) {
-                            Toast.makeText(context, "Stripe error", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } catch (Exception e) {
-                    mainHandler.post(() -> Toast.makeText(context, "Payment init failed", Toast.LENGTH_SHORT).show());
-                }
+            @Override
+            public void onFailed(@NonNull String message) {
+                isPaymentProcessing = false;
+                Toast.makeText(context, context.getString(R.string.payment_failed) + ": " + message, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPending() {
+                isPaymentProcessing = false;
+                Toast.makeText(context, context.getString(R.string.payment_pending), Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    private void onPaymentSheetResult(@NonNull PaymentSheetResult paymentSheetResult) {
-        if (paymentSheetResult instanceof PaymentSheetResult.Completed) {
-            onStripePaymentCompleted();
-            isPaymentProcessing = false;
-        } else if (paymentSheetResult instanceof PaymentSheetResult.Canceled) {
-            Toast.makeText(context, "Payment cancelled", Toast.LENGTH_SHORT).show();
-            isPaymentProcessing = false;
-        } else if (paymentSheetResult instanceof PaymentSheetResult.Failed) {
-            PaymentSheetResult.Failed failed = (PaymentSheetResult.Failed) paymentSheetResult;
-            isPaymentProcessing = false;
-            Toast.makeText(context, context.getString(R.string.payment_failed) + ": " + (failed.getError() != null ? failed.getError().getMessage() : ""), Toast.LENGTH_SHORT).show();
+    /** Shows Google Play prices (user's currency) in the unlock sheet. */
+    private void applyPlayPrices(View view) {
+        int[][] pairs = {
+                {R.id.textPrice1, PURCHASE_TYPE_COINS_PACK_1},
+                {R.id.textPrice2, PURCHASE_TYPE_COINS_PACK_2},
+                {R.id.textPrice3, PURCHASE_TYPE_COINS_PACK_3},
+                {R.id.textPrice4, PURCHASE_TYPE_COINS_PACK_4},
+                {R.id.tvWeeklyMemberShip1, PURCHASE_TYPE_WEEKLY},
+                {R.id.tvMonthlyMemberShip1, PURCHASE_TYPE_MONTHLY},
+                {R.id.tvYearlyMemberShip1, PURCHASE_TYPE_YEARLY},
+        };
+        for (int[] pair : pairs) {
+            String price = PlayBilling.formattedPrice(pair[1]);
+            TextView tv = view.findViewById(pair[0]);
+            if (price != null && tv != null) tv.setText(price);
         }
     }
 
@@ -632,6 +579,7 @@ public class RewardAdManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        PlayBilling.whenPricesReady(view.getContext(), () -> applyPlayPrices(view));
     }
 
     private void setMemberPlan(JSONObject plan5, TextView tvWeeklyMemberShip1, TextView tvWeeklyMemberShip2, TextView tvWeeklyMemberTitle, String country) {

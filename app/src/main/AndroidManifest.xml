@@ -26,23 +26,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.payment.TransactionHistoryScreen"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.payment.TransactionDetailScreen"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.premium.TopUpActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.payment.CheckoutActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.payment.PaymentIntegrationScreen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
